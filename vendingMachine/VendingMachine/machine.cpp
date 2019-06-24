@@ -181,7 +181,7 @@ void Machine::createHistoryFile() const
 	cout << "\nPurchase history saved to file\n"<< fileName<<endl;
 	if (!purchasesHistory.empty()) 
 	{
-			for (int i = static_cast<int>(purchasesHistory.size())-1; i > 0; --i)
+			for (int i = static_cast<int>(purchasesHistory.size())-1; i >= 0; --i)
 			outfile << purchasesHistory[i].getHistory() << '\n';
 	}
 	else outfile << "No one product purchased";
