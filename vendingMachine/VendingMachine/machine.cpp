@@ -117,13 +117,13 @@ void Machine::buyProduct()
 	string cellNameEntered;
 	cout << "Enter cell name:";
 	cin >> cellNameEntered;
-	int cellNameLetter = toupper(cellNameEntered.front());	//íà ñëó÷àé, åñëè ïîëüçîâàòåëü ââåäåò ñòðî÷íóþ áóêâó âìåñòî çàãëàâíîé
+	int cellNameLetter = toupper(cellNameEntered.front());	//Ð½Ð° ÑÐ»ÑƒÑ‡Ð°Ð¹, ÐµÑÐ»Ð¸ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð²Ð²ÐµÐ´ÐµÑ‚ ÑÑ‚Ñ€Ð¾Ñ‡Ð½ÑƒÑŽ Ð±ÑƒÐºÐ²Ñƒ Ð²Ð¼ÐµÑÑ‚Ð¾ Ð·Ð°Ð³Ð»Ð°Ð²Ð½Ð¾Ð¹
 	int cellNameNumber = cellNameEntered.back() - '0';
 	if ((cellNameEntered.length() == 2) && (cellNameLetter >= firstLetter && (cellNameLetter < firstLetter + lettersCount)
 		&& (cellNameNumber > 0 && cellNameNumber <= maxNumber)))
 
 	{
-		int index = (maxNumber * (cellNameLetter - firstLetter) + cellNameNumber - 1);	//ïîäñ÷åò èíäåêñà ÿ÷åéêè, èç êîòîðîé ïðîèçâîäèòñÿ ïîêóïêà
+		int index = (maxNumber * (cellNameLetter - firstLetter) + cellNameNumber - 1);	//Ð¿Ð¾Ð´ÑÑ‡ÐµÑ‚ Ð¸Ð½Ð´ÐµÐºÑÐ° ÑÑ‡ÐµÐ¹ÐºÐ¸, Ð¸Ð· ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÑÑ Ð¿Ð¾ÐºÑƒÐ¿ÐºÐ°
 		if (cells[index].isCellProductsEmpty())
 			cout << "\nCell " << cells[index].getName() << " is empty\n" << endl;
 		else 
@@ -181,7 +181,7 @@ void Machine::createHistoryFile() const
 	cout << "\nPurchase history saved to file\n"<< fileName<<endl;
 	if (!purchasesHistory.empty()) 
 	{
-		for (int i = purchasesHistory.size() - 1; i >= 0; --i)
+			for (int i = static_cast<int>(purchasesHistory.size())-1; i > 0; --i)
 			outfile << purchasesHistory[i].getHistory() << '\n';
 	}
 	else outfile << "No one product purchased";
