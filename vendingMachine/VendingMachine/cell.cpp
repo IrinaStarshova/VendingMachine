@@ -76,5 +76,5 @@ const vector<Product>& Cell::getCellProducts() const
 
 int Cell::getTotalPrice() const
 {
-	return (numberOfProducts - cellProducts.size())*price;
+	return (numberOfProducts - static_cast<int>(cellProducts.size()))*price;
 }
