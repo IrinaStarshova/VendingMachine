@@ -21,3 +21,10 @@ vendingMachine/VendingMachine/x64/Debug/VendingMachine.tlog/VendingMachine.lastb
 vendingMachine/x64/Debug/VendingMachine.exe
 vendingMachine/x64/Debug/VendingMachine.ilk
 vendingMachine/x64/Debug/VendingMachine.pdb
+vendingMachine/.vs/VendingMachine/v14/.suo
+vendingMachine/VendingMachine/x64/Debug/availableProductsFile.obj
+vendingMachine/VendingMachine/x64/Debug/createAndFreeFilePointer.obj
+vendingMachine/VendingMachine/x64/Debug/fileStatistics.obj
+vendingMachine/VendingMachine/x64/Debug/historyFile.obj
+vendingMachine/VendingMachine/x64/Debug/priceStatisticsFile.obj
+vendingMachine/VendingMachine/x64/Debug/VendingMachine.Build.CppClean.log

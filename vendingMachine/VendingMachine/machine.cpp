@@ -1,14 +1,12 @@
 #include "machine.h"
 #include "constants.h"
 #include "dateTime.h"
-#include "purchasedProduct.h"
-#include "product.h"
+#include "fileStatistics.h"
+#include "createAndFreeFilePointer.h"
 #include <iostream>
 #include <random>
 #include <chrono>
 #include <algorithm>
-#include <fstream>
-
 
 using namespace std;
 
@@ -103,9 +101,16 @@ void Machine::Run()
 		{
 		case 1: displayMachineMenu(); break;
 		case 2: buyProduct(); break;
-		case 3: createHistoryFile(); break;
-		case 4: createPriceStatisticsFile(); break;
-		case 5: createAvailableProductsFile(); break;
+		case 3:
+		case 4:
+		case 5: 
+		{
+			FileStatistics* file = createStatisticsFile(enteredNumber); 
+			if (file)
+				file->writeFileStatistics(this);
+			freeStatisticsFile(file);
+			break; 
+		}
 		case 6: break;
 		default:cout << "\nInvalid value of menu item number entered\nEnter the menu item number from the list below\n" << endl; break;
 		}
@@ -149,65 +154,17 @@ void Machine::buyProduct()
 	else cout << "\nInvalid value of cell name entered\nEnter the cell name from the list\n" << endl;
 }
 
-void Machine::createAvailableProductsFile() const
+int Machine::getTotalProducts() const
 {
-	DateAndTime currentDateAndTime;
-	string fileName = "stat_valid_" + currentDateAndTime.getDateString() + "_" + currentDateAndTime.getTimeStringForFileName() + ".log";
-	ofstream outfile(fileName);
-	cout << "\nStatistics of available products  saved to file\n" << fileName << endl;
-	if (!totalProducts)
-		outfile << "No available products  in the machine";
-	else 
-	{
-		vector<Product> availableProducts;
-		availableProducts.reserve(totalProducts);
-		for (const auto& i:cells)
-		{
-			const vector<Product>& V = i.getCellProducts();
-			availableProducts.insert(availableProducts.end(), V.begin(), V.end());
-		}
-		sort(availableProducts.begin(), availableProducts.end(), Product::SortByNameAndDate());
-
-		for (const auto& i : availableProducts)
-			outfile << i.getName() << " - " << i.getExpirationDateString() << '\n';
-	}
+	return totalProducts;
 }
 
-void Machine::createHistoryFile() const
+const vector<Cell>& Machine::getCells() const
 {
-	DateAndTime currentDateAndTime;
-	string fileName = "history_" + currentDateAndTime.getDateString() + "_" + currentDateAndTime.getTimeStringForFileName() + ".log";
-	ofstream outfile(fileName);
-	cout << "\nPurchase history saved to file\n"<< fileName<<endl;
-	if (!purchasesHistory.empty()) 
-	{
-			for (int i = static_cast<int>(purchasesHistory.size())-1; i >= 0; --i)
-			outfile << purchasesHistory[i].getHistory() << '\n';
-	}
-	else outfile << "No one product purchased";
-
+	return cells;
 }
 
-void Machine::createPriceStatisticsFile() const
+const std::vector<Purchase>& Machine::getPurchasesHistory() const
 {
-	DateAndTime currentDateAndTime;
-	string fileName = "stat_price_" + currentDateAndTime.getDateString() + "_" + currentDateAndTime.getTimeStringForFileName() + ".log";
-	ofstream outfile(fileName);
-	cout << "\nPurchase statistics saved to file\n" << fileName << endl;
-	vector<PurchasedProduct> purchasedProducts;
-	for (const auto& i : cells)
-	{
-		if (i.getTotalPrice()) 
-		{
-			purchasedProducts.push_back(PurchasedProduct(i.getNameOfProduct(), i.getTotalPrice()));
-		}
-	}
-	if (!purchasedProducts.empty()) 
-	{
-		sort(purchasedProducts.rbegin(), purchasedProducts.rend());
-		for (const auto& i : purchasedProducts)
-			outfile << i.getStatistic() << '\n';
-	}
-	else
-		outfile << "No one product purchased";
+	return purchasesHistory;
 }

@@ -143,18 +143,28 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="createAndFreeFilePointer.cpp" />
     <ClCompile Include="dateTime.cpp" />
+    <ClCompile Include="fileStatistics.cpp" />
+    <ClCompile Include="historyFile.cpp" />
     <ClCompile Include="machine.cpp" />
+    <ClCompile Include="priceStatisticsFile.cpp" />
     <ClCompile Include="product.cpp" />
     <ClCompile Include="purchase.cpp" />
     <ClCompile Include="purchasedProduct.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="availableProductsFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="availableProductsFile.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="createAndFreeFilePointer.h" />
     <ClInclude Include="dateTime.h" />
+    <ClInclude Include="fileStatistics.h" />
+    <ClInclude Include="historyFile.h" />
     <ClInclude Include="machine.h" />
+    <ClInclude Include="priceStatisticsFile.h" />
     <ClInclude Include="product.h" />
     <ClInclude Include="purchase.h" />
     <ClInclude Include="purchasedProduct.h" />

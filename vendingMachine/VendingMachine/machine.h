@@ -40,13 +40,13 @@ public:
 
 	//Производит покупку товара
 	void buyProduct();
-	
-	//Записывает в текстовый файл статистику оставшихся в автомате товаров
-	void createAvailableProductsFile() const;
-	
-	//Записывает в текстовый файл историю покупок
-	void createHistoryFile() const;
-	
-	//Записывает в текстовый файл статистику покупок, сгруппированную по товарам
-	void createPriceStatisticsFile() const;
+
+	//Возвращает общее количество продуктов в автомате
+	int getTotalProducts() const;
+
+	//Возвращает массив ячеек
+	const std::vector<Cell>& getCells() const;
+
+	//Возвращает массив данных о покупке
+	const std::vector<Purchase>& getPurchasesHistory() const;
 };
